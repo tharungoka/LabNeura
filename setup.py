@@ -35,12 +35,17 @@ class CMakeBuild(build_ext):
 
 setup(
     name='labneura',
-    version='0.0.10',
+    version='0.0.11',
     author='Tharun Kumar Goka',
     author_email='tharunkumargoka2020@gmail.com',
     description='Python package for ML and EDA functionalities with C++ backend',
     ext_modules=[CMakeExtension('cpp', sourcedir='labneura')],
-    cmdclass=dict(build_ext=CMakeBuild),
+    cmdclass={
+        'build_ext': CMakeBuild
+    },
     packages=setuptools.find_packages(),
     zip_safe=False,
+    install_requires=[
+        'pybind11',
+    ]
 )

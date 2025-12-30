@@ -4,14 +4,32 @@
 #include <vector>
 #include "data.h"
 #include "algorithms.h"
-#include "ml.h"
 
 namespace py = pybind11;
 
 PYBIND11_MODULE(labneura, m) {
-    bind_linear_regression(m);
     bind_sorting(m);
     bind_graph(m);
+    bind_tensor(m);
+    bind_avl<int, int>(m, "Int", "Int");
+    bind_avl<int, float>(m, "Int", "Float");
+    bind_avl<int, double>(m, "Int", "Double");
+    bind_avl<int, std::string>(m, "Int", "String");
+
+    bind_avl<float, int>(m, "Float", "Int");
+    bind_avl<float, float>(m, "Float", "Float");
+    bind_avl<float, double>(m, "Float", "Double");
+    bind_avl<float, std::string>(m, "Float", "String");
+
+    bind_avl<double, int>(m, "Double", "Int");
+    bind_avl<double, float>(m, "Double", "Float");
+    bind_avl<double, double>(m, "Double", "Double");
+    bind_avl<double, std::string>(m, "Double", "String");
+
+    bind_avl<std::string, int>(m, "String", "Int");
+    bind_avl<std::string, float>(m, "String", "Float");
+    bind_avl<std::string, double>(m, "String", "Double");
+    bind_avl<std::string, std::string>(m, "String", "String");
 
     bind_vector_wrapper<py::object>(m);
     bind_vector<int>(m, "Int");

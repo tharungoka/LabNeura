@@ -28,7 +28,7 @@ build:
 # Install the Python package
 install:
 	@echo "Installing Python package..."
-	pip3 install $(PYTHON_DIR)
+	cd $(PYTHON_DIR) && pip install .
 
 # Run C++ tests
 cpp_test: build
@@ -51,7 +51,7 @@ publish:
 clean:
 	@echo "Cleaning up..."
 	rm -rf $(BUILD_DIR)
-	cd $(PYTHON_DIR) && python setup.py clean --all
+	cd $(PYTHON_DIR) && python3 setup.py clean --all
 	rm -rf $(PYTHON_DIR)/build
 	rm -rf $(PYTHON_DIR)/dist
 	rm -rf $(PYTHON_DIR)/*.egg-info

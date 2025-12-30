@@ -3,8 +3,23 @@
 #include <pybind11/stl.h>
 #include "algorithms/sorting.h"
 #include "algorithms/graph.h"
+#include "algorithms/avl.h"
 
 namespace py=pybind11;
+
+template <typename Key, typename Value>
+void bind_avl(py::module& m, const std::string& key_type, const std::string& value_type) {
+    std::string class_name = "AVL" + key_type + value_type;
+    py::class_<AVL<Key, Value>>(m, class_name.c_str())
+        .def(py::init<>())
+        .def("insert", &AVL<Key, Value>::insert)
+        .def("remove", &AVL<Key, Value>::remove)
+        .def("find", &AVL<Key, Value>::find)
+        .def("__setitem__", &AVL<Key, Value>::insert)
+        .def("__getitem__", &AVL<Key, Value>::find)
+        .def("__delitem__", &AVL<Key, Value>::remove);
+        // .def("search", &AVLTree<Key, Value>::search);
+}
 
 void bind_sorting(py::module &m) {
     py::class_<Sorting>(m, "Sorting")
