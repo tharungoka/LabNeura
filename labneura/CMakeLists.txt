@@ -37,7 +37,7 @@ endif()
 # Include PYBIND11 and OpenMP directories
 find_package(pybind11 REQUIRED)
 include_directories(${PYBIND11_INCLUDE_DIR})
-find_package(openMP REQUIRED)
+# find_package(openMP REQUIRED)
 
 # Include Torch directories
 set(Torch_DIR /Users/gtk/GTK/LabNeura/env/lib/python3.11/site-packages/torch/share/cmake/Torch)
@@ -54,7 +54,8 @@ add_library(labneura MODULE bindings/interface.cpp
     src/data/tensor.cpp
     )
 target_include_directories(labneura PRIVATE ${TORCH_INCLUDE_DIRS})
-target_link_libraries(labneura PRIVATE pybind11::module OpenMP::OpenMP_CXX "${TORCH_LIBRARIES}")
+# target_link_libraries(labneura PRIVATE pybind11::module OpenMP::OpenMP_CXX "${TORCH_LIBRARIES}")
+target_link_libraries(labneura PRIVATE pybind11::module "${TORCH_LIBRARIES}")
 set_target_properties(labneura PROPERTIES PREFIX "${PYTHON_MODULE_PREFIX}" SUFFIX "${PYTHON_MODULE_EXTENSION}")
 set_property(TARGET labneura PROPERTY CXX_STANDARD 17)
 
